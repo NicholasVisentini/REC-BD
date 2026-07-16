@@ -22,6 +22,7 @@ function cadastrar(req, res) {
     var fkAutor = req.body.fkAutor;
     var precoCompra = req.body.precoCompra;
     var precoVenda = req.body.precoVenda;
+    var qtdEstoque = req.body.qtdEstoque;
 
     if (titulo == undefined) {
         res.status(400).send("O título está indefinido!");
@@ -33,8 +34,10 @@ function cadastrar(req, res) {
         res.status(400).send("O preço de venda está indefinido!");
     } else if (fkGenero == undefined) {
         res.status(400).send("O gênero está indefinido!");
+    } else if (qtdEstoque == undefined) {
+        res.status(400).send("O estoque está indefinido!");
     } else {
-        livrosModel.cadastrar(titulo, fkAutor, fkGenero, precoCompra, precoVenda)
+        livrosModel.cadastrar(titulo, fkAutor, fkGenero, precoCompra, precoVenda, qtdEstoque)
             .then(
                 function (resultado) {
                     res.json(resultado);

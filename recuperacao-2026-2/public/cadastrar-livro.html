@@ -115,6 +115,12 @@
                                 <input name="precoVenda" id="precoVenda" maxlength="20" type="Text"></input>
                             </label>
 
+                            <label>
+                                Quantidade em estoque:
+                                <br>
+                                <input name="qtdEstoque" id="qtdEstoque" maxlength="20" type="Text"></input>
+                            </label>
+
 
                             <button>Cadastrar</button>
                         </form>
@@ -146,7 +152,29 @@
             fkGenero: form_postagem.fkGenero_lista.value,
             fkAutor: form_postagem.fkAutor_lista.value,
             precoCompra: form_postagem.precoCompra.value,
-            precoVenda: form_postagem.precoVenda.value
+            precoVenda: form_postagem.precoVenda.value,
+            qtdEstoque: form_postagem.qtdEstoque.value
+        }
+
+        if(corpo.precoCompra >= 100 && (corpo.fkGenero == 1 || corpo.fkGenero == 2)){
+            let conta1 = corpo.precoCompra * 0.225;
+            let total= conta1 + Number(corpo.precoCompra);
+            alert(`O preço da venda deve ser 22,5% acima do valor da compra ou seja = ${total}` )
+            corpo.precoVenda = total;
+        }
+
+        if(corpo.precoCompra <= 50 && (corpo.fkGenero == 2 || corpo.fkGenero == 4)){
+            let conta1 = corpo.precoCompra * 0.25;
+            let total= conta1 + Number(corpo.precoCompra);
+            alert(`O preço da venda deve ser 25% acima do valor da compra ou seja = ${total}` )
+            corpo.precoVenda = total;
+        }
+
+        if(corpo.precoCompra > 50 && corpo.precoCompra < 100 && corpo.fkGenero == 3){
+            let conta1 = corpo.precoCompra * 0.275;
+            let total= conta1 + Number(corpo.precoCompra);
+            alert(`O preço da venda deve ser 27,5% acima do valor da compra ou seja = ${total}` )
+            corpo.precoVenda = total;
         }
 
         fetch(`/livros/cadastrar`, {
@@ -258,7 +286,6 @@
 
         });
     }
-
 
     
 

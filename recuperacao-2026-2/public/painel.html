@@ -22,6 +22,7 @@
 
     <!-- scripts do Chart.js - 2022-1 -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="path/to/chartjs/dist/chart.umd.min.js"></script>
 
     <!--FONT AWESOME-->
     <script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script>
@@ -96,11 +97,10 @@
 </html>
 
 <script>
-    
 
     let proximaAtualizacao;
 
-    window.onload = exibirAquariosDoUsuario();
+    window.onload = obterDadosGrafico();
 
     function exibirAquariosDoUsuario() {
         var aquarios = JSON.parse(sessionStorage.AQUARIOS);
@@ -180,9 +180,9 @@
 
     //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
     //     Para ajustar o "select", ajuste o comando sql em src/models
-    function obterDadosGrafico(idAquario) {
+    function obterDadosGrafico(fkGenero) {
 
-        alterarTitulo(idAquario)
+        alterarTitulo(fkGenero)
 
         if (proximaAtualizacao != undefined) {
             clearTimeout(proximaAtualizacao);
@@ -194,7 +194,7 @@
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                     resposta.reverse();
 
-                    plotarGrafico(resposta, idAquario);
+                    plotarGrafico(resposta, fkGenero);
 
                 });
             } else {
@@ -257,7 +257,7 @@
 
         // Criando estrutura para plotar gráfico - config
         const config = {
-            type: 'line',
+            type: 'bar',
             data: dados,
         };
 

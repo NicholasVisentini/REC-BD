@@ -110,7 +110,7 @@
 </html>
 
 <script>
-    // let autores = [];
+    // let nome = [];
 
     function limparFormulario() {
         document.getElementById("form_postagem").reset();
@@ -122,13 +122,12 @@
             nome: form_postagem.nome.value
         }
 
-        corpo.push(corponome.value);
-        console.log(corpo)
-
-        for(let i = 0; i < corpo.length; i++)
-            if (corpo.includes("!") || corpo.includes("@") || corpo.includes("#") || corpo.includes("$") || corpo.includes("%") || corpo.includes("¨") || corpo.includes("&") || corpo.includes("*") || corpo.includes("(") || corpo.includes(")") || corpo.includes("-") || corpo.includes("_") || corpo.includes("1") || corpo.includes("2") || corpo.includes("3") || corpo.includes("4") || corpo.includes("5") || corpo.includes("6") || corpo.includes("7") || corpo.includes("8") || corpo.includes("9") || corpo.includes("0") ) { 
-                alert("Não foi possivel fazer o cadastro");
-            } else {
+    for (let i = 0; i < corpo.nome.length; i++) {
+        if (corpo.nome[i] == "!" || corpo.nome[i] == "@" || corpo.nome[i] == "#" || corpo.nome[i] == "$" || corpo.nome[i] == "%" || corpo.nome[i] == "¨" || corpo.nome[i] == "&" || corpo.nome[i] == "*" || corpo.nome[i] == "(" || corpo.nome[i] == ")" || corpo.nome[i] == "-" || corpo.nome[i] == "_" || corpo.nome[i] == "1" || corpo.nome[i] == "2" || corpo.nome[i] == "3" || corpo.nome[i] == "4" || corpo.nome[i] == "5" || corpo.nome[i] == "6" || corpo.nome[i] == "7" || corpo.nome[i] == "8" || corpo.nome[i] == "9" || corpo.nome[i] == "0") {
+        alert("Não foi possivel fazer o cadastro");
+        return false;
+    }
+    }
 
         fetch(`/autores/cadastrar`, {
             method: "post",
@@ -158,6 +157,5 @@
         return false;
 
     }
-}
 
 </script>
